@@ -5,6 +5,7 @@
   
 </head>
 <body>
+  <h1>UPDATE</h1>
   <button id="runQueryButton">Run Query</button>
   <div id="result"></div>
 
@@ -16,6 +17,7 @@
 // Run a query
 // Function to run the Neo4j query
     function runQuery() {
+        console.log("This is working...")
         var session = driver.session();
         session
         .run('MATCH (n) RETURN (n) LIMIT 5')
