@@ -1,14 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <script src="https://unpkg.com/neo4j-driver"></script>
+  
 </head>
 <body>
-    <center>
-        <h1>MY ONLINE PAGE BRO, EXACTLY</h1>
-    </center>
+  <button id="runQueryButton">Run Query</button>
+  <div id="result"></div>
+
+  <script>
+
+
+    var driver = neo4j.driver('bolt://44.202.225.0:7687', neo4j.auth.basic('neo4j', 'schematics-telecommunications-bumps'));
+
+// Run a query
+// Function to run the Neo4j query
+    function runQuery() {
+        var session = driver.session();
+        session
+        .run('MATCH (n) RETURN (n) LIMIT 5')
+        .then(function(result) {
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = ''; // Clear previous results
+    
+            result.records.forEach(function(record) {
+            // Access the returned data
+            var node = record.get("n");
+            var properties = node.properties;
+    
+            // Create a new paragraph element to display the data
+            var paragraph = document.createElement('p');
+            paragraph.textContent = JSON.stringify(properties);
+    
+            // Append the paragraph element to the result div
+            resultDiv.appendChild(paragraph);
+            });
+    
+            session.close();
+            driver.close();
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    }
+  
+  // Add event listener to the button
+  var button = document.getElementById('runQueryButton');
+  button.addEventListener('click', runQuery);
+  </script>
 </body>
 </html>
