@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head>
+<!-- saved from url=(0039)https://pro-scout.github.io/search.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Busqueda - Pro-Scout</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://unpkg.com/neo4j-driver"></script>
+    <link rel="stylesheet" type="text/css" href="./Busqueda - Pro-Scout_files/styles.css">
+    <script src="./Busqueda - Pro-Scout_files/neo4j-driver"></script>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="search.html">Buscar</a></li>
-            <li><a href="contact.html">Contacto</a></li>
+            <li><a href="https://pro-scout.github.io/index.html">Inicio</a></li>
+            <li><a href="https://pro-scout.github.io/search.html">Buscar</a></li>
+            <li><a href="https://pro-scout.github.io/contact.html">Contacto</a></li>
         </ul>
     </nav>
 
     <div class="search-filters">
         <h1>Filtros de búsqueda: Encuentra el talento</h1>
-        <form id = "filter-form">
+        <form id="filter-form">
             <label for="goals">Goals</label>
             <input type="text" id="goals" name="goals">
 
@@ -65,7 +65,7 @@
     <script>
         // Set up the Neo4j connection
 
-        const driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "UltimatelyMatchPlayer"));
+        const driver = neo4j.driver("bolt+s://3e1c8066f2212c05034fb17814a2667f.neo4jsandbox.com:7687", neo4j.auth.basic("neo4j", "schematics-telecommunications-bumps"));
 
         // Create a session to run queries
         const session = driver.session();
@@ -154,5 +154,5 @@
 
     </script>
     <div id="result-container"></div>
-</body>
-</html>
+
+</body></html>
