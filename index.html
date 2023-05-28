@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Busqueda - Pro-Scout</title>
+    <title>Pro-Scout</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://unpkg.com/neo4j-driver"></script>
 </head>
 <body>
     <nav>
@@ -14,145 +13,17 @@
         </ul>
     </nav>
 
-    <div class="search-filters">
-        <h1>Filtros de búsqueda: Encuentra el talento</h1>
-        <form id = "filter-form">
-            <label for="goals">Goals</label>
-            <input type="text" id="goals" name="goals">
-
-            <label for="assistances">Assistances</label>
-            <input type="text" id="assistances" name="assistances">
-
-            <label for="passes">Passes</label>
-            <input type="text" id="passes" name="passes">
-
-            <label for="recoveries">Recoveries</label>
-            <input type="text" id="recoveries" name="recoveries">
-
-            <label for="age">Age</label>
-            <input type="text" id="age" name="age">
-               
-            <!-- submitt suspended from now on-->
-            <!--
-                <input type="submit" value="Filter">
-            -->
-            
-
-            
-            
-        </form>
+    <div class="hero">
+        <video autoplay muted loop id="background-video">
+            <source src="media/hero-video00.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        
+        <div class="hero-content">
+            <h1>Pro-Scout</h1>
+            <p>Descubre el talento oculto: Pro-Scout, tu base de datos de fútbolistas</p>
+            <a href="search.html" class="cta">Inicia tu búsqueda</a>
+        </div>
     </div>
-
-    <!--
-                This will run the query
-    -->
-    <br>
-    <center><button id="query-button"><h4>Recommed</h4></button></center>
-    <hr>
-    <center><h2>Result</h2></center>
-    <hr>
-    <center><div id="result"></div></center>
-   
-
-
-    <div class="database-elements">
-        <!-- Cosas de la base de datos -->
-    </div>
-
-    <!--
-        All code related neo4j consult
-    -->
-    <script>
-        // Set up the Neo4j connection
-
-        const driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "UltimatelyMatchPlayer"));
-
-        // Create a session to run queries
-        const session = driver.session();
-
-        // Define the Cypher query
-      
-        // Function to handle the button click event
-        function handleQueryButtonClick() {
-        // Clear previous results
-        const resultContainer = document.getElementById("result-container");
-        resultContainer.innerHTML = "";
-
-
-        //Getting the data from the form created
-        const form = document.getElementById("filter-form");
-        const goals = form.elements.goals.value;
-        const assistances = form.elements.assistances.value;
-        const passes = form.elements.passes.value;
-        const age = form.elements.age.value;
-        const recoveries = form.elements.recoveries.value;
-
-        console.log("goals received: "+goals)
-        console.log("assistances received: "+assistances)
-        console.log("passes received: "+passes)
-        console.log("recoveries received: "+recoveries)
-        console.log("age received: "+age)
-
-        const query = 'match (n) where n.goals >= '+goals+" and n.assists >= "+assistances+" and n.recov >= "+recoveries+" and n.PasTotCmp >= "+passes+" and n.age = "+age+" return(n)";
-        console.log('The query generated: '+query)
-
-        // Execute the query
-        session.run(query)
-            .then(result => {
-
-                var resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = ''; // Clear previous results
-
-            // Process the query result
-            result.records.forEach(record => {
-                var node = record.get("n");
-
-                var player_name = node.properties.name
-                var player_league = node.properties.league
-                var player_position = node.properties.pos
-                var goals_data = node.properties.goals
-                var assistances_data = node.properties.assists
-                var passes_data = node.properties.PasTotCmp
-                var recoveries_data = node.properties.recov
-                var age_data = node.properties.age
-                var aeriawon_data = node.properties.aerialWon
-
-                var properties = node.properties
-                console.log(properties)
-
-                const paragraph = document.createElement('p');
-                paragraph.innerHTML = "<h1>"+player_name+"</h1>"+"Position: "+player_position+"<br>"+player_league+"<br>"+"Goals: "+goals_data+"<br>"+"Age: "+age_data+"<br>"+"Total passes completed: "+passes_data+"<br>"+"Assistances: "+assistances_data+"<br>"+"Recoveries: "+recoveries_data+"<br>"+"Aerial won: "+aeriawon_data
-                var hrLine = document.createElement("hr")
-
-                const lineBreak = document.createElement('br');
-                resultDiv.appendChild(lineBreak);
-
-                // Append the paragraph element to the result div
-                resultDiv.appendChild(paragraph);
-                resultDiv.appendChild(hrLine)
-
-            });
-            })
-            .catch(error => {
-            // Handle any errors
-            console.error("Error executing Neo4j query:", error);
-            });
-        }
-
-        // Add event listener to the query button
-        const queryButton = document.getElementById("query-button");
-        queryButton.addEventListener("click", handleQueryButtonClick);
-
-        // Close the session and driver when done
-        function closeSessionAndDriver() {
-        session.close();
-        driver.close();
-        }
-
-        // Call closeSessionAndDriver when the page is unloaded or refreshed
-        window.addEventListener("beforeunload", closeSessionAndDriver);
-
-    </script>
-    <div id="result-container"></div>
 </body>
 </html>
