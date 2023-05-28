@@ -1,0 +1,137 @@
+/* Reset some default styles */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f5;
+    color: #000606;
+}
+
+nav {
+    background-color: #f5b639;
+    position: sticky;
+    top: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 1em 0;
+}
+
+nav a {
+    color: #000606;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #73381d;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    position: absolute;
+    text-align: center;
+    z-index: 2;
+}
+
+.hero-content h1, .hero-content p {
+    color: #f4f5f5;
+    text-shadow: 2px 2px 4px #000606;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+}
+
+.hero-content .cta {
+    display: inline-block;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    background-color: #f5b639;
+    color: #000606;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-content .cta:hover {
+    background-color: #73381d;
+    color: #f4f5f5;
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+}
+/* Additional CSS for Contact Page */
+.about-us {
+    width: 80%;
+    margin: 2em auto;
+    color: #000606;
+}
+
+.about-us h1 {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.person {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2em;
+    background-color: #f5b639;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.person:nth-of-type(even) {
+    align-items: flex-end;
+}
+
+.person h2 {
+    margin: 0.5em 0;
+}
+
+.person img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.person p {
+    color: #73381d;
+}
